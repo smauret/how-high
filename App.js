@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import logo from './assets/kite.png';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Image source={logo} style={{ width: 305, height: 159 }} />
+      <Text style={{color: '#888', fontSize: 30}}>How High was that !?</Text>
     </View>
   );
 }
