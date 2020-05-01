@@ -22,8 +22,6 @@
     <list default="true" id="8224353b-c5ee-4f0b-aed0-26b2ee3cd544" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +59,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -85,7 +83,8 @@
       <workItem from="1588248008003" duration="225000" />
       <workItem from="1588248940864" duration="4289000" />
       <workItem from="1588269997597" duration="206000" />
-      <workItem from="1588336768487" duration="1601000" />
+      <workItem from="1588336768487" duration="3135000" />
+      <workItem from="1588355271237" duration="2432000" />
     </task>
     <servers />
   </component>
@@ -125,10 +124,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="517" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588168228665" />
-    <state x="172" y="31" key="SettingsEditor" timestamp="1588251002905">
+    <state x="172" y="31" key="SettingsEditor" timestamp="1588356163391">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="172" y="31" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1588251002905" />
+    <state x="172" y="31" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1588356163391" />
   </component>
   <component name="masterDetails">
     <states>

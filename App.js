@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
-import { Accelerometer } from 'expo-sensors';
+import React, {useState, useEffect} from 'react';
+import {TouchableOpacity, Image, StyleSheet, Text, View, Dimensions} from 'react-native';
+import {Accelerometer} from 'expo-sensors';
 import logo from './assets/kite.png';
+
+const screen = Dimensions.get('window')
 
 export default function App() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    _toggle();
     return () => {
       _unsubscribe();
     };
@@ -22,7 +23,7 @@ export default function App() {
   };
 
   const _subscribe = () => {
-    Accelerometer.setUpdateInterval(500);
+    //Accelerometer.setUpdateInterval(500);
     this._subscription = Accelerometer.addListener(accelerometerData => {
       setData(accelerometerData);
     });
@@ -33,18 +34,19 @@ export default function App() {
     this._subscription = null;
   };
 
-  let { y } = data;
+  let y = data.y + 1;
+
   return (
     <View style={styles.container}>
-      <Image source={logo} style={styles.logo} />
-      <Text style={styles.text}>How high was that !?</Text>
+      <Image source={logo} style={styles.logo}/>
+      <Text style={styles.titleText}>How high was that !?</Text>
 
       <TouchableOpacity
         onPress={_toggle}
         style={styles.button}>
-        <Text style={styles.buttonText}>Read accelerometer data</Text>
+        <Text style={styles.buttonText}>Jump!</Text>
       </TouchableOpacity>
-      <Text style={styles.text}>
+      <Text style={{...styles.measureText, ...{color: y < 0 ? 'red' : 'green'}}}>
         y: {round(y)}
       </Text>
     </View>
@@ -68,21 +70,30 @@ const styles = StyleSheet.create({
     borderColor: 'red'
   },
   logo: {
-      width: 305,
-      height: 159,
-      marginBottom: 10
+    width: 305,
+    height: 159,
+    marginBottom: 10
   },
-  text: {
-      color: '#888',
-      fontSize: 30
-  },
-  button: {
-    backgroundColor: "#F9A826",
-    padding: 20,
-    borderRadius: 5,
+  titleText: {
+    color: '#888',
+    fontSize: 30
   },
   buttonText: {
-    fontSize: 20,
-    color: '#fff',
+    fontSize: 23,
+    color: '#888',
+  },
+  measureText: {
+    fontSize: 30
+  },
+  button: {
+    borderColor: "#F9A826",
+    padding: 20,
+    margin: 20,
+    borderRadius: screen.width / 3,
+    borderWidth: 10,
+    width: screen.width / 3,
+    height: screen.width / 3,
+    justifyContent: 'center',
+    alignContent: 'center'
   }
 });
