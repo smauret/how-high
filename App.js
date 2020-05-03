@@ -53,7 +53,6 @@ export default function App() {
         <Text style={styles.buttonText}>Jump!</Text>
       </TouchableOpacity>
       <Text style={styles.titleText}> height: {state.jumpHeight}cm </Text>
-      <Text style={styles.titleText}> time: {(state.endTime[0] - state.startTime[1]) / 1000}s </Text>
     </View>
   );
 }
