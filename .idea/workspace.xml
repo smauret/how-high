@@ -28,13 +28,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>ws</find>
-      <find>mem&quot;:</find>
-      <find>braces&quot;:</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -84,7 +77,8 @@
       <workItem from="1588248940864" duration="4289000" />
       <workItem from="1588269997597" duration="206000" />
       <workItem from="1588336768487" duration="3135000" />
-      <workItem from="1588355271237" duration="2432000" />
+      <workItem from="1588355271237" duration="5733000" />
+      <workItem from="1588429384261" duration="16304000" />
     </task>
     <servers />
   </component>
@@ -124,10 +118,14 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="517" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588168228665" />
-    <state x="172" y="31" key="SettingsEditor" timestamp="1588356163391">
+    <state x="145" y="38" key="SettingsEditor" timestamp="1588430759983">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="172" y="31" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1588356163391" />
+    <state x="145" y="38" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1588430759983" />
+    <state x="347" y="175" key="run.anything.popup" timestamp="1588430299299">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="347" y="175" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1588430299299" />
   </component>
   <component name="masterDetails">
     <states>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
 import {TouchableOpacity, Image, StyleSheet, Text, View, Dimensions} from 'react-native';
 import {Accelerometer} from 'expo-sensors';
 import logo from './assets/kite.png';
@@ -6,7 +6,16 @@ import logo from './assets/kite.png';
 const screen = Dimensions.get('window')
 
 export default function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    startTime: [],
+    endTime: [],
+    acc: [],
+    highestAcc: 0,
+    curAcc: null,
+    prevAcc: null
+  });
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     return () => {
@@ -17,15 +26,16 @@ export default function App() {
   const _toggle = () => {
     if (this._subscription) {
       _unsubscribe();
+      dispatch({type: computeJumpHeight})
     } else {
+      dispatch({type: 'init'})
       _subscribe();
     }
   };
 
   const _subscribe = () => {
-    //Accelerometer.setUpdateInterval(500);
     this._subscription = Accelerometer.addListener(accelerometerData => {
-      setData(accelerometerData);
+      dispatch({type: 'addCurrentAcc', payload: round(accelerometerData.y + 1)})
     });
   };
 
@@ -34,26 +44,103 @@ export default function App() {
     this._subscription = null;
   };
 
-  let y = data.y + 1;
-
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo}/>
       <Text style={styles.titleText}>How high was that !?</Text>
 
-      <TouchableOpacity
-        onPress={_toggle}
-        style={styles.button}>
+      <TouchableOpacity onPress={_toggle} style={styles.button}>
         <Text style={styles.buttonText}>Jump!</Text>
       </TouchableOpacity>
-      <Text style={{...styles.measureText, ...{color: y < 0 ? 'red' : 'green'}}}>
-        y: {round(y)}
-      </Text>
+      <Text style={styles.titleText}> height: {state.jumpHeight}cm </Text>
+      <Text style={styles.titleText}> time: {(state.endTime[0] - state.startTime[1]) / 1000}s </Text>
     </View>
   );
 }
 
-function round(n) {
+const initialState = {
+  startTime: [],
+  endTime: [],
+  jumpAcc: [],
+  curHighestAcc: null,
+  curAcc: null,
+  jumpHeight: 0
+};
+
+function reducer(state, action) {
+  const {startTime, endTime, curAcc, jumpAcc} = state
+  switch (action.type) {
+    case 'addCurrentAcc':
+      const isNewStart = checkNewStartTime(curAcc, action.payload)
+      const newStart = !isNewStart ? state.startTime : [isNewStart, ...state.startTime]
+      const isNewEnd = checkNewEndTime(startTime.length, endTime.length, curAcc, action.payload)
+      const newEnd = !isNewEnd ? state.endTime : [isNewEnd, ...state.endTime]
+      const newHighestAcc = !isNewEnd ? state.jumpAcc : [state.curHighestAcc, ...state.jumpAcc]
+
+      return {
+        ...state,
+        ...{
+          curAcc: action.payload,
+          startTime: newStart,
+          endTime: newEnd,
+          curHighestAcc: setHighestAcc(action.payload, state.curHighestAcc, isNewEnd),
+          jumpAcc: newHighestAcc
+        }
+      }
+    case computeJumpHeight:
+      return {
+        ...state,
+        ...{
+          jumpHeight: computeJumpHeight(startTime, endTime, jumpAcc)
+        }
+      }
+    case 'init':
+      return initialState;
+    default:
+      throw new Error();
+  }
+}
+
+const checkNewStartTime = (prevAcc, curAcc) => {
+  if (prevAcc <= 0 && curAcc >= 0) {
+    return Date.now()
+  }
+  return false
+}
+
+const checkNewEndTime = (startTimeLength, endTimeLength, prevAcc, curAcc) => {
+  if (startTimeLength <= endTimeLength) {
+    return false
+  }
+  if (prevAcc >= 0 && curAcc <= 0) {
+    return Date.now()
+  }
+  return false
+}
+
+const setHighestAcc = (curAcc, highestAcc, isNewEnd) => {
+  if (isNewEnd) { //reset to zero at the end of jump
+    return 0
+  }
+  if (curAcc > highestAcc) {
+    return curAcc
+  } else {
+    return highestAcc
+  }
+}
+
+const computeJumpHeight = (start, end, acc) => {
+  if (start.length > end.length) {
+    start.shift()
+  }
+
+  let jumpTimes = start.map((s, i) => (end[i] - s) / 1000)
+  let jumpHeights = jumpTimes.map((t, i) => 0.5 * acc[i] * t * t * 100)
+
+  return round(Math.max(...jumpHeights))
+}
+
+const round = (n) => {
   if (!n) {
     return 0;
   }
@@ -81,9 +168,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 23,
     color: '#888',
-  },
-  measureText: {
-    fontSize: 30
   },
   button: {
     borderColor: "#F9A826",
