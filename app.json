@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Jump height measurement for kiteboarders",
+    "name": "Jump height measurement",
     "slug": "how-high",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/splash.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -26,6 +26,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": ""
+    "description": "Measure how high you can jump!"
   }
 }
