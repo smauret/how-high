@@ -1,7 +1,7 @@
 import React, {useState, useReducer, useEffect} from 'react';
 import {TouchableOpacity, Image, StyleSheet, Text, View, Dimensions} from 'react-native';
 import {Accelerometer} from 'expo-sensors';
-import logo from './assets/kite.png';
+import logo from './assets/splash.png';
 
 const screen = Dimensions.get('window')
 
@@ -50,9 +50,9 @@ export default function App() {
       <Text style={styles.titleText}>How high was that !?</Text>
 
       <TouchableOpacity onPress={_toggle} style={styles.button}>
-        <Text style={styles.buttonText}>Jump!</Text>
+        <Text style={styles.buttonText}>{this._subscription  ? 'Stop!' : 'Jump!'}</Text>
       </TouchableOpacity>
-      <Text style={styles.titleText}> height: {state.jumpHeight}cm </Text>
+      <Text style={styles.titleText}> {!this._subscription && state.jumpHeight + 'cm'} </Text>
     </View>
   );
 }
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 23,
     color: '#888',
+    textAlign: 'center'
   },
   button: {
     borderColor: "#F9A826",
@@ -176,7 +177,6 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     width: screen.width / 3,
     height: screen.width / 3,
-    justifyContent: 'center',
-    alignContent: 'center'
+    justifyContent: 'center'
   }
 });
